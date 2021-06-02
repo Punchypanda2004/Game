@@ -8,45 +8,45 @@ cnv.height = 750;
 
 let dudex = 455;
 let dudey = 600;
-let dudeg = 0;
-let dudej = 6;
+let dudeg = 0.3;
+let dudedy = 0;
+
+
+let leftKey = false;
+let rightKey = false;
 
 //  Move left, right and jump
 
-drawDude(dudex, dudey)
+drawDude(dudex, dudey);
 requestAnimationFrame(animateDude);
 
 function animateDude() {
     background("orange");
 
+    moveDude()
     drawDude(dudex, dudey);
 
     requestAnimationFrame(animateDude);
 }
 
+document.addEventListener("keydown", keydownHandles);
+document.addEventListener("keyup", keyupHandles);
 
-
-function animateJump() {
-    if (dudey <= 601) {
-        jumpMove();
-        gravity();
-        dudeg += 0.1;
-    } else {
-        dudeg = 0;
+function keydownHandles(event) {
+    if (event.code == "ArrowLeft") {
+        leftKey = true;
+    } else if (event.code == "ArrowRight") {
+        rightKey = true;
+    } else if (event.code == "Space") {
+        
     }
-
 }
 
-document.addEventListener("keydown", movement)
-
-function movement(event) {
+function keyupHandles(event) {
     if (event.code == "ArrowLeft") {
-        leftMove();
+        leftKey = false;
     } else if (event.code == "ArrowRight") {
-        rightMove();
-    } else if (event.code == "Space") {
-        animateJump();
-        dudey -= 1; 
+        rightKey = false;
     }
 }
 

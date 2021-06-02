@@ -1,14 +1,15 @@
 // Player and Object movement and collision
 
-function leftMove() {
-    if (dudex > 50) {
-        dudex -= 10;
-    }
+function moveDude() {
+    moveDudeHtz()
+    
 }
 
-function rightMove() {
-    if (dudex < 850) {
-        dudex += 10;
+function moveDudeHtz() {
+    if (leftKey == true) {
+        dudex += -5;
+    } else if (rightKey == true) {
+        dudex += 5;
     }
 }
 
