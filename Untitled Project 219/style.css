@@ -2,7 +2,7 @@ body {
     text-align: center;
   }
   
-  canvas {
-    border: 1px solid grey;
-  }
+canvas {
+  border: 50px solid brown;
+}
   
