@@ -6,10 +6,31 @@ cnv.height = 750;
 
 // Gobal Variables
 
-let dudex = 455;
-let dudey = 750 - 100;
-let dudeg = 0.3;
-let dudedy = 0;
+// MY DUDE
+let dude = {
+    x: 455,
+    y: 750 -100,
+    g: 0.3,
+    dy: 0,
+}
+
+// PLATFORMS
+let plat1 = {
+        x: 120,
+        y: 430,
+        w: 250,
+    }
+let plat2 = {
+        x: 630,
+        y: 430,
+        w: 250,
+    }
+let plat3 = {
+        x: 0,
+        y: 750,
+        w: 1000,
+    }
+
 let ballSpd = 2;
 let ballx = 1080;
 let bally = 450;
@@ -23,30 +44,31 @@ let onground = true;
 
 // Arrays
 
-let fireObjects = [];
+let fireBalls = [];
 for (let i = 0; i == eventAmt; i++) {
-    fireObjects.push(drawRock(ballx, bally));
+    fireBalls.push(drawRock(ballx, bally));
 }
 
-let Platforms = [];
-
-
 // Animation
-drawDude(dudex, dudey);
+drawDude(dude.x, dude.y);
 makePlat();
 requestAnimationFrame(animateDude);
 
 function animateDude() {
+    // LOGIC
+    moveDude();
+    colisionDetect();
+    platCollide();
+    // makeEvent();
+    // causeEvent();
+
+    // DRAW
     background("salmon");
 
-    makePlat(120, 430, 250);
-    makePlat(630, 430, 250);
-
-    moveDude();
-    makeEvent();
-    causeEvent();
-    colisionDetect();
-    drawDude(dudex, dudey);
+    makePlat(plat1.x, plat1.y, plat1.w);
+    makePlat(plat2.x, plat2.y, plat2.w);
+    makePlat(plat3.x, plat3.y, plat3.w);
+    drawDude(dude.x, dude.y);
     drawRock(ballx, bally);
 
 
@@ -65,8 +87,8 @@ function keydownHandles(event) {
         rightKey = true;
     } else if (event.code == "Space") {
         if (onground == true) {
-            dudedy = -15;  
-            dudeg = 0.3;
+            dude.dy = -15;  
+            dude.g = 0.3;
             onground = false; 
         }
     }
@@ -82,7 +104,7 @@ function keyupHandles(event) {
 
 // BALLS
 
-setInterval(jumpss, 500)  
+setInterval(jumpss, 10)  
 
 function jumpss() {
     console.log(onground);

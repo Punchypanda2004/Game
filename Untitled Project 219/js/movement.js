@@ -10,14 +10,14 @@ function moveDude() {
 
 function moveDudeHtz() {
     if (leftKey == true) {
-        if (dudex >= 0) {
-            dudex += -5;
-        } else if (dudex == 0) {
+        if (dude.x >= 0) {
+            dude.x += -7;
+        } else if (dude.x == 0) {
         }
     } else if (rightKey == true) {
-        if (dudex + 100 <= cnv.width) {
-            dudex += 5;
-        } else if (dudex + 100 == cnv.width) {
+        if (dude.x + 100 <= cnv.width) {
+            dude.x += 7;
+        } else if (dude.x + 100 == cnv.width) {
         }
     }
 }
@@ -25,17 +25,17 @@ function moveDudeHtz() {
 function dudeJump() {
 
     if (onground == true) {
-        dudeg = 0;
-        dudedy = 0;
+        dude.g = 0;
+        dude.dy = 0;
     }
-    dudey += dudedy;
-    dudedy += dudeg;
+    dude.y += dude.dy;
+    dude.dy += dude.g;
 
 }
 
 function jumpMove() {
     if (dudey > 50) {
-        dudey -= dudej;
+        dude.y -= dude.j;
     }
 }
 
@@ -53,23 +53,25 @@ function ballMove() {
 // Platform Colision 
 
 function colisionDetect() {
-
-        if (dudey + 100 + dudedy >= cnv.height) {
-            onground = true
-        } else if (dudey + 100 >= 430 ) {
-            if (dudex - 630 <= 130 && dudex > 630) {
-                onground = true
-            }
-            if (dudex - 120 <= 130 && dudex > 120) {
-                onground = true
-            } else {
-                onground = false
-                dudeg = 0.3
-            }
-
-        }
+    
 }
 
-(120, 430, 250);
-(630, 430, 250);
+function platCollide() {
+    if (dude.y + 100 >= cnv.height) {
+        onground = true;
+    } else if (plat1.x < dude.x && dude.x < plat1.x + plat1.w && plat1.y < dude.y + 100 && dude.y + 100 < plat1.y + 20) {
+        onground = true;
+        dude.y = plat1.y - 100;
+    } else if (plat2.x < dude.x && dude.x < plat2.x + plat2.w && plat2.y < dude.y && dude.y < plat2.y + 20) {
+        onground = true;
+        dude.y = plat2.y;
+    } else {
+        onground = false;
+        dude.g = 0.3;
+    }  
+}
+
+// x: 120,
+// y: 430,
+// w: 250,
 
