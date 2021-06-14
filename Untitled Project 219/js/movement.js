@@ -1,9 +1,9 @@
 // Player and Object movement and collision
 
-function moveDude() {
+function moveThings() {
     moveDudeHtz();
     dudeJump();
-    ballMove();
+    rockMove();
 }
 
 // Player movement
@@ -23,55 +23,52 @@ function moveDudeHtz() {
 }
 
 function dudeJump() {
-
-    if (onground == true) {
-        dude.g = 0;
-        dude.dy = 0;
+    if (dude.y <= 0) {
+        dude.y = 1;
+        dude.dy = 0; 
     }
+
     dude.y += dude.dy;
     dude.dy += dude.g;
 
 }
 
-function jumpMove() {
-    if (dudey > 50) {
-        dude.y -= dude.j;
-    }
-}
-
 // Ball movement
 
-function ballMove() {
-    ballx -= ballSpd
+function rockMove() {
+    rock.y += rock.Spd
 
-    if (ballx <= -80) {
-        ballx = 1080;
+    if (rock.y >= 800) {
+        rock.y = -50;
     }
 
+}
+
+// Death Objects Colision
+
+function rockCollide() {
+    if (rock.x - rock.r < dude.x + 100 && dude.x < rock.x + rock.r && rock.y + rock.r > dude.y && dude.y + 100 > rock.y - rock.r) { 
+        death = true;
+    }
 }
 
 // Platform Colision 
 
-function colisionDetect() {
-    
-}
-
 function platCollide() {
     if (dude.y + 100 >= cnv.height) {
         onground = true;
-    } else if (plat1.x < dude.x && dude.x < plat1.x + plat1.w && plat1.y < dude.y + 100 && dude.y + 100 < plat1.y + 20) {
+        dude.dy = 1;
+        dude.y = cnv.height - 100
+    } else if (plat1.x < dude.x + 100 && dude.x < plat1.x + plat1.w && plat1.y < dude.y + 100 && dude.y + 100 < plat1.y + 20) {
         onground = true;
         dude.y = plat1.y - 100;
-    } else if (plat2.x < dude.x && dude.x < plat2.x + plat2.w && plat2.y < dude.y && dude.y < plat2.y + 20) {
+        dude.dy = 1;
+    } else if (plat2.x < dude.x + 100 && dude.x < plat2.x + plat2.w && plat2.y < dude.y + 100 && dude.y + 100 < plat2.y + 20) {
         onground = true;
-        dude.y = plat2.y;
+        dude.y = plat2.y - 100;
+        dude.dy = 1;
     } else {
         onground = false;
-        dude.g = 0.3;
     }  
 }
-
-// x: 120,
-// y: 430,
-// w: 250,
 

@@ -9,15 +9,18 @@ function drawDude(x, y) {
 
 // Draw Flaming Rock 
 
-function drawRock(x, y) {
+function drawRock(x, y, r) {
     fill("red");
-    circle(x, y, 20, "fill");
+    circle(x, y, r, "fill");
 }
 
-//Draw Death, Start, And Score
+//Draw Death and Score
 
-function youDead() {
-    
+function youDead(score) {
+    font("44px Comic Sans MS")
+    fill("darkblue")
+    text("Game Over", 385, 320)
+    text("Score" + " " + score, 390, 370)
 }
 
 // Platforms
