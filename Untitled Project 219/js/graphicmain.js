@@ -41,11 +41,6 @@ function circle(x, y, r, mode) {
     }
   }
 
-// Trigles
-function triangle(x1, y1, x2, y2, x3, y3, mode) {
-  ctx.beginPath();
-}
-
 // Txt 
 function text(text, x, y) {
   ctx.fillText(text, x, y);

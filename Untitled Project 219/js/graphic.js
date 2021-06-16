@@ -2,16 +2,23 @@
 
 // Draw The Dude
 
-function drawDude(x, y) {
+function drawDude(x, y, s) {
     fill("black");
-    rect(x, y, 100, 100, "fill");
+    rect(x, y, s, s, "fill");
 }
 
 // Draw Flaming Rock 
+function newRock(positionx, positiony) {
+    return {
+        x: positionx,
+        y: positiony,
+        r: 20,
+    }
+}
 
-function drawRock(x, y, r) {
+function drawFire(aFire) {
     fill("red");
-    circle(x, y, r, "fill");
+    circle(aFire.x, aFire.y, aFire.r, "fill")
 }
 
 //Draw Death and Score
@@ -27,4 +34,15 @@ function youDead(score) {
 function makePlat(x, y, w) {
     fill("brown")
     rect(x, y, w, 20, "fill") 
+}
+
+let plat1 = {
+    x: 120,
+    y: 430,
+    w: 250, 
+}
+let plat2 = {
+    x: 630,
+    y: 430,
+    w: 250,
 }

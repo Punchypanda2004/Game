@@ -12,67 +12,51 @@ let dude = {
     y: 750 -100,
     g: 0.3,
     dy: 0,
+    s: 80
 }
 
-// PLATFORMS
-let plat1 = {
-        x: 120,
-        y: 430,
-        w: 250, 
-    }
-let plat2 = {
-        x: 630,
-        y: 430,
-        w: 250,
-    }
-
-let rock = {
-    Spd: 2,
-    x: 500,
-    y: -50,
-    r: 20
-}
-
-
+let leftRight = 0;
+let fireBallSpd = 1;
 let currentEvt = 0;
 let eventAmt = 0;
 let playerScore = 0;
 
-let eventActive = false;
+// Trues and falses
+
 let leftKey = false;
 let rightKey = false;
 let onground = true;
 let death = false;
+let left = false;
+let right = false;
 
 // Arrays
 
-// let fireBalls = [];
-// for (let i = 0; i == eventAmt; i++) {
-//     fireBalls.push(drawFlameRock());
-// }
+let fireBalls = [];
 
 // One-Shot Function Calls!
-drawDude(dude.x, dude.y);
 makePlat();
 requestAnimationFrame(animateDude);
 
 function animateDude() {
     if (death == false) {
     // LOGIC
-    moveThings();
+    moveDude();
     platCollide();
     rockCollide();
-    // makeEvent();
-    // causeEvent();
+    causeEvent();
 
     // DRAW
     background("salmon");
-
     makePlat(plat1.x, plat1.y, plat1.w);
     makePlat(plat2.x, plat2.y, plat2.w);
-    drawDude(dude.x, dude.y);
-    drawRock(rock.x, rock.y, rock.r);
-
+    drawDude(dude.x, dude.y, dude.s);
+    if (fireBalls.length >= 1) {
+        for (let i = 0; i < fireBalls.length; i++) {
+            fireMove(fireBalls[i]);
+            drawFire(fireBalls[i]);
+        }
+    }
 
     requestAnimationFrame(animateDude);
     } else if (death == true) {
@@ -104,13 +88,10 @@ function keyupHandles(event) {
         leftKey = false;
     } else if (event.code == "ArrowRight") {
         rightKey = false;
+    } else if (event.code == "Space") {
+        if (dude.dy < -4) {
+            dude.dy = -6;
+        }
     }
 }
 
-// BALLS
-
-// setInterval(jumpss, 500)  
-
-// function jumpss() {
-//     console.log(death);
-// }
