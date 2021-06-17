@@ -11,7 +11,7 @@ function moveDudeHtz() {
     if (leftKey == true) {
         if (dude.x >= 0) {
             dude.x += -7;
-        } else if (dude.x == 0) {
+        }  else if (dude.x == 0) {
         }
     } else if (rightKey == true) {
         if (dude.x + dude.s <= cnv.width) {
@@ -29,29 +29,52 @@ function dudeJump() {
 
     dude.y += dude.dy;
     dude.dy += dude.g;
-
 }
 
 // Fire Ball movement
 
-function fireMove() {
-    for (let i = 0; i < fireBalls.length; i++) {
-        fireBalls[i].x -= fireBallSpd
+// Move Fire Ball on X-axis
+function fireMoveLR() {
+    if (LR == true) {
+        for (let i = 0; i < fireBalls.length; i++) {
+            if (left == true) {
+                fireBalls[i].x -= fireBallSpd
+            }
+            if (left == false) {
+                fireBalls[i].x += fireBallSpd
+            }
+        }
+    }
+}
 
-        if (fireBalls[i].x <= -50 && left == true) {
-            fireBalls.splice(i, fireBalls.length);
-        }  
-        if (fireBalls[i].x >= 1050 && right == true) {
-            fireBalls.splice(i, fireBalls.length);
+// Move Fire Ball on Y-axis
+function fireMoveUD() {
+    if (LR == false)
+    for (let i = 0; i < fireBalls.length; i++) {
+        fireBalls[i].y += fireBallSpd
+    }
+}
+
+// Checks if new event should happen
+function ballChecker() {
+    if (eventactive == true) {
+        for (let i = 0; i < fireBalls.length; i++) {
+            if (fireBalls[i].x >= 1250 || fireBalls[i].x <= -250) {
+                eventactive = false;
+            }
+            if (fireBalls[i].y >= 850) {
+                eventactive = false;
+            }
         }
     }
 }
 
 // Death Objects Colision
 
-function rockCollide() {
+function fireCollide() {
     for (let i = 0; i < fireBalls.length; i++) {
-        if (fireBalls[i].x - 20 < dude.x + dude.s && dude.x < fireBalls[i].x + 20 && fireBalls[i].y + 20 > dude.y && dude.y + dude.s > fireBalls[i].y - 20) { 
+        // Checking where the dude and ball are in relation to eachother
+        if (fireBalls[i].x - fireBalls[i].r + 5 < dude.x + dude.s && dude.x < fireBalls[i].x + fireBalls[i].r - 5 && fireBalls[i].y + fireBalls[i].r - 5 > dude.y && dude.y + dude.s > fireBalls[i].y - fireBalls[i].r + 5) { 
             death = true;
         }
     }

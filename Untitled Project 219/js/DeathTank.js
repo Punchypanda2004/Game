@@ -15,11 +15,13 @@ let dude = {
     s: 80
 }
 
+
 let leftRight = 0;
-let fireBallSpd = 1;
+let fireBallSpd = 0.5;
 let currentEvt = 0;
-let eventAmt = 0;
 let playerScore = 0;
+let y = 0;
+let x = 0;
 
 // Trues and falses
 
@@ -27,8 +29,9 @@ let leftKey = false;
 let rightKey = false;
 let onground = true;
 let death = false;
-let left = false;
-let right = false;
+let eventactive = false;
+let LR = true;
+let left = true;
 
 // Arrays
 
@@ -43,21 +46,22 @@ function animateDude() {
     // LOGIC
     moveDude();
     platCollide();
-    rockCollide();
-    causeEvent();
+    fireCollide();
+    ballChecker();
 
     // DRAW
     background("salmon");
     makePlat(plat1.x, plat1.y, plat1.w);
     makePlat(plat2.x, plat2.y, plat2.w);
     drawDude(dude.x, dude.y, dude.s);
-    if (fireBalls.length >= 1) {
-        for (let i = 0; i < fireBalls.length; i++) {
-            fireMove(fireBalls[i]);
-            drawFire(fireBalls[i]);
-        }
+
+    for (let i = 0; i < fireBalls.length; i++) {
+        fireMoveLR(fireBalls[i]);
+        fireMoveUD(fireBalls[i]);
+        drawFire(fireBalls[i]);
     }
 
+    causeEvent();
     requestAnimationFrame(animateDude);
     } else if (death == true) {
         youDead(playerScore)
@@ -76,22 +80,29 @@ function keydownHandles(event) {
         rightKey = true;
     } else if (event.code == "Space") {
         if (onground == true) {
-            dude.dy = -15;  
-            dude.g = 0.3;
-            onground = false; 
-        }
+            dude.dy = -13;  
+            dude.g = 0.25;
+            onground = false;
+        } 
     }
 }
 
-function keyupHandles(event) {
+function keyupHandles(event) { 
     if (event.code == "ArrowLeft") {
         leftKey = false;
     } else if (event.code == "ArrowRight") {
         rightKey = false;
     } else if (event.code == "Space") {
-        if (dude.dy < -4) {
-            dude.dy = -6;
+        if (dude.dy < -3) {
+            dude.dy = -3; 
         }
     }
 }
 
+// pop
+
+setInterval(yes, 500) 
+
+function yes() {
+    console.log(eventactive);
+}
