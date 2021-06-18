@@ -59,10 +59,10 @@ function fireMoveUD() {
 function ballChecker() {
     if (eventactive == true) {
         for (let i = 0; i < fireBalls.length; i++) {
-            if (fireBalls[i].x >= 1250 || fireBalls[i].x <= -250) {
+            if (fireBalls[i].x >= 1450 || fireBalls[i].x <= -450) {
                 eventactive = false;
             }
-            if (fireBalls[i].y >= 850) {
+            if (fireBalls[i].y >= 950) {
                 eventactive = false;
             }
         }

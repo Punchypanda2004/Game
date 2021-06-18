@@ -22,6 +22,7 @@ let currentEvt = 0;
 let playerScore = 0;
 let y = 0;
 let x = 0;
+let mode = 0;
 
 // Trues and falses
 
@@ -80,8 +81,8 @@ function keydownHandles(event) {
         rightKey = true;
     } else if (event.code == "Space") {
         if (onground == true) {
-            dude.dy = -13;  
-            dude.g = 0.25;
+            dude.dy = -20;  
+            dude.g = 0.46;
             onground = false;
         } 
     }
@@ -93,8 +94,8 @@ function keyupHandles(event) {
     } else if (event.code == "ArrowRight") {
         rightKey = false;
     } else if (event.code == "Space") {
-        if (dude.dy < -3) {
-            dude.dy = -3; 
+        if (dude.dy < -5) {
+            dude.dy = -5; 
         }
     }
 }
